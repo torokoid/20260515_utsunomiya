@@ -249,7 +249,7 @@ p.note { display: none; }
 <h2><span class="yellow">最終的に時計部分をGUI化して別窓で表示するコードに進化</span></h2>
 <a href="time_GUI.txt" target="_blank"><img src="20260514_003.png" alt="サンプル画像" class="responsive-media"></a>
 
-<h2><span class="yellow">ラズパイの世界時計はこんな感じで動きました、動画です↓</span></h2>
+<h2><span class="yellow">ラズパイの世界時計GUIはこんな感じで動きました<br>左下にはOSのコマンドプロンプトでCPUの温度まで表示してます<br>動画です↓</span></h2>
 <div class="youtube-wrapper">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/4sP4vu_F9yw?si=enqGETiNV10vQvr9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
