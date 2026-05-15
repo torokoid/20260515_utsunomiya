@@ -1,80 +1,66 @@
-{\rtf1\ansi\ansicpg932\cocoartf2869
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;}
-{\colortbl;\red255\green255\blue255;\red0\green0\blue0;}
-{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww17020\viewh11980\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+from datetime import datetime
+import pytz
+import tkinter as tk
 
-\f0\fs24 \cf0 from datetime import datetime\
-import pytz\
-import tkinter as tk\
-\
-# \uc0\u37117 \u24066 \u12392 \u12479 \u12452 \u12512 \u12478 \u12540 \u12531 \
-cities = \{\
-    "Japan (Tokyo)"      : "Asia/Tokyo",\
-    "Thailand (Bangkok)" : "Asia/Bangkok",\
-    "India (Delhi)"      : "Asia/Kolkata",\
-    "Ukraine (Kyiv)"     : "Europe/Kyiv",\
-    "Germany (Berlin)"   : "Europe/Berlin",\
-    "UK (London)"        : "Europe/London",\
-    "New York"           : "America/New_York",\
-    "Los Angeles"        : "America/Los_Angeles"\
-\}\
-\
-# \uc0\u12513 \u12452 \u12531 \u12454 \u12451 \u12531 \u12489 \u12454 \
-root = tk.Tk()\
-root.title("World Clock")\
-root.geometry("500x350")\
-\
-# \uc0\u12479 \u12452 \u12488 \u12523 \
-title = tk.Label(\
-    root,\
-    text="World Clock",\
-    font=("Arial", 20, "bold")\
-)\
-title.pack(pady=10)\
-\
-# \uc0\u26178 \u35336 \u34920 \u31034 \u12521 \u12505 \u12523 \
-labels = \{\}\
-\
-for city in cities:\
-    label = tk.Label(\
-        root,\
-        text="",\
-        font=("Courier", 14),\
-        anchor="w"\
-        
-\f1 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 fg="lime",\
-\pard\pardeftab720\partightenfactor0
-\cf0          bg="black"
-\f0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 \
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
-\cf0     )\
-    label.pack(fill="x", padx=20)\
-\
-    labels[city] = label\
-\
-# \uc0\u26178 \u21051 \u26356 \u26032 \u38306 \u25968 \
-def update_clock():\
-\
-    for city, timezone in cities.items():\
-\
-        tz = pytz.timezone(timezone)\
-\
-        now = datetime.now(tz)\
-\
-        current_time = now.strftime("%Y-%m-%d  %H:%M:%S")\
-\
-        labels[city].config(\
-            text=f"\{city:<22\} : \{current_time\}"\
-        )\
-\
-    # 1000ms\uc0\u24460 \u12395 \u20877 \u23455 \u34892 \
-    root.after(1000, update_clock)\
-\
-# \uc0\u26356 \u26032 \u38283 \u22987 \
-update_clock()\
-\
-# GUI\uc0\u38283 \u22987 \
-root.mainloop()}
+# 都市とタイムゾーン
+cities = {
+    "Japan (Tokyo)"      : "Asia/Tokyo",
+    "Thailand (Bangkok)" : "Asia/Bangkok",
+    "India (Delhi)"      : "Asia/Kolkata",
+    "Ukraine (Kyiv)"     : "Europe/Kyiv",
+    "Germany (Berlin)"   : "Europe/Berlin",
+    "UK (London)"        : "Europe/London",
+    "New York"           : "America/New_York",
+    "Los Angeles"        : "America/Los_Angeles"
+}
+
+# メインウィンドウ
+root = tk.Tk()
+root.title("World Clock")
+root.geometry("500x350")
+
+# タイトル
+title = tk.Label(
+    root,
+    text="World Clock",
+    font=("Arial", 20, "bold")
+)
+title.pack(pady=10)
+
+# 時計表示ラベル
+labels = {}
+
+for city in cities:
+    label = tk.Label(
+        root,
+        text="",
+        font=("Courier", 14),
+        anchor="w"
+    )
+    label.pack(fill="x", padx=20)
+
+    labels[city] = label
+
+# 時刻更新関数
+def update_clock():
+
+    for city, timezone in cities.items():
+
+        tz = pytz.timezone(timezone)
+
+        now = datetime.now(tz)
+
+        current_time = now.strftime("%Y-%m-%d  %H:%M:%S")
+
+        labels[city].config(
+            text=f"{city:<22} : {current_time}"
+        )
+
+    # 1000ms後に再実行
+    root.after(1000, update_clock)
+
+# 更新開始
+update_clock()
+
+# GUI開始
+root.mainloop()
